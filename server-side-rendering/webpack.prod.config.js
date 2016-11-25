@@ -26,7 +26,7 @@ module.exports = validate({
 
     new HtmlPlugin({
       title: 'GitHub app',
-      template: path.join(__dirname, 'src', 'html', 'template.html')
+      template: path.join(__dirname, 'src', 'client', 'html', 'template.html')
     }),
 
     new webpack.optimize.UglifyJsPlugin({
@@ -61,7 +61,8 @@ module.exports = validate({
   resolve: {
     alias: {
       src: path.join(__dirname, 'src'),
-      components: path.join(__dirname, 'src', 'components')
+      components: path.join(__dirname, 'src', 'components'),
+      css: path.join(__dirname, 'src', 'client', 'css')
     }
   }
 })

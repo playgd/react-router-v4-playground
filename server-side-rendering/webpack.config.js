@@ -12,8 +12,9 @@ module.exports = validate({
 
   entry: [
     'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
+    // 'webpack-dev-server/client?http://localhost:3000',
+    // 'webpack/hot/only-dev-server',
+    'webpack-hot-middleware/client',
     path.join(__dirname, 'src', 'index')
   ],
 
@@ -29,7 +30,7 @@ module.exports = validate({
 
     new HtmlPlugin({
       title: 'My app',
-      template: path.join(__dirname, 'src', 'html', 'template.html')
+      template: path.join(__dirname, 'src', 'client', 'html', 'template.html')
     })
   ],
 
@@ -57,7 +58,8 @@ module.exports = validate({
   resolve: {
     alias: {
       src: path.join(__dirname, 'src'),
-      components: path.join(__dirname, 'src', 'components')
+      components: path.join(__dirname, 'src', 'components'),
+      css: path.join(__dirname, 'src', 'client', 'css')
     }
   }
 })
