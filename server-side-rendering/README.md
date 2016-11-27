@@ -1,35 +1,32 @@
-# Workflow ReactJS
+# Server side Rendering with React
 
-## What's inside it?
+**Use HtmlWebpackPlugin with Express:**
+https://github.com/ampedandwired/html-webpack-plugin/issues/145#issuecomment-170554832
 
-1. Webpack;
-* Babel;
-* React hot loader;
-* HTML and CSS generated automatically by webpack;
-* Jest for tests and Chai for assertions;
-* Storybook to create isolatelly components' stories
+```js
+var express = require('express');
+var app = express();
+var webpack = require('webpack');
+var path = require('path');
 
-## Dependencies:
+var compiler = webpack(require('./webpack.config.js'));
 
-- Node.js `>=` v6;
+app.use(require('webpack-dev-middleware')(compiler, {
+  noInfo: true,
+  publicPath: '/'
+}));
 
-## Up and running
+app.use('*', function (req, res, next) {
+  var filename = path.join(compiler.outputPath,'index.html');
+  compiler.outputFileSystem.readFile(filename, function(err, result){
+    if (err) {
+      return next(err);
+    }
+    res.set('content-type','text/html');
+    res.send(result);
+    res.end();
+  });
+});
 
-- Clone this repository: `git clone git@github.com:fdaciuk/workflow-reactjs.git`;
-- Remove `.git` directory;
-- Install dependencies: `yarn` (or `npm i`);
-- Run `yarn start` (or `npm start`) to develop on `http://localhost:3000`
-- Run `yarn build` (or `npm run build`) for production build (files will be generated on `dist` directory)
-
-## Scripts
-
-- `yarn start (or npm start)`: Starts the application
-- `yarn test (or npm test)`: Run tests once
-- `yarn test:watch (or npm run test:watch)`: Run tests in watch mode
-- `yarn build (or npm run build)`: Build project to production
-- `yarn storybook (or npm run storybook)`: Run Storybook on 6006 port
-- `yarn build-storybook`: Build Storybook to static files
-
-## License
-
-[MIT](https://github.com/fdaciuk/licenses/blob/master/MIT-LICENSE.md) &copy; Fernando Daciuk
+app.listen(3000);
+```

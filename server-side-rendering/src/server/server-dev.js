@@ -25,10 +25,23 @@ export default (app) => {
   app.use(webpackHot(compiler))
 
   app.use((req, res) => {
+    const context = createServerRenderContext()
     const filename = path.join(compiler.outputPath, 'generated.html')
     const htmlApp = renderToString(
-      <App />
+      <ServerRouter location={req.url} context={context}>
+        <App />
+      </ServerRouter>
     )
+
+    const result = context.getResult()
+
+    if (result.redirect) {
+      console.log('redirect')
+    }
+
+    if (result.missed) {
+      console.log('missed')
+    }
 
     compiler.outputFileSystem.readFile(filename, (err, result) => {
       if (err) return err
