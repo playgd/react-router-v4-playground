@@ -11,7 +11,8 @@ new WebpackDevServer(webpack(config), {
   stats: { colors: true }
 }).listen(3000, (err) => {
   if (err) {
-    return console.log(err)
+    console.log(err)
+    return
   }
 
   console.log('Listening on http://localhost:3000')
