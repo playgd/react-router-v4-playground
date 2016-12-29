@@ -2,6 +2,6 @@
 
 export default (app) => {
   app.use((req, res) => {
-    res.send('production')
+    res.send('prod')
   })
 }
