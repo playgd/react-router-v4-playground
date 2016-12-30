@@ -35,7 +35,7 @@ export default (app) => {
 
     const result = context.getResult()
 
-    console.log('what is in result?', result)
+    console.log('what is in result??', result)
 
     if (result.redirect) {
       console.log('redirect')
