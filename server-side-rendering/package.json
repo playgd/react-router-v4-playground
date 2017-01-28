@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "nodemon src/server/index.js",
+    "start": "cross-env NODE_ENV=production nodejs-dashboard -- node -r nodejs-dashboard dist/server/index.js",
+    "start:dev": "nodemon src/server/index.js",
     "test": "jest --coverage",
     "test:watch": "yarn test -- --watch",
     "lint": "standard --verbose | snazzy",
@@ -31,6 +32,7 @@
     "gulp": "^3.9.1",
     "html-webpack-plugin": "^2.24.1",
     "jest-cli": "^17.0.3",
+    "nodejs-dashboard": "^0.3.0",
     "react-hot-loader": "^3.0.0-beta.6",
     "snazzy": "^5.0.0",
     "standard": "^8.5.0",
