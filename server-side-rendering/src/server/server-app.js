@@ -14,7 +14,6 @@ const config = require(`../../webpack${configFile}.config`)
 const compiler = webpack(config)
 
 export default (app) => {
-  console.log(4)
   app.use(webpackDev(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath,
