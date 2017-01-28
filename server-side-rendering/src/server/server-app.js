@@ -9,8 +9,8 @@ import { renderToString } from 'react-dom/server'
 import { ServerRouter, createServerRenderContext } from 'react-router'
 import App from '../app'
 
-const configFile = process.env.NODE_ENV === 'production' ? 'prod' : ''
-const config = require(`../../webpack.${configFile}.config`)
+const configFile = process.env.NODE_ENV === 'production' ? '.prod' : ''
+const config = require(`../../webpack${configFile}.config`)
 const compiler = webpack(config)
 
 export default (app) => {
