@@ -1,17 +1,20 @@
 {
   "scripts": {
-    "start": "webpack-dashboard -- nodemon src/server/index.js",
+    "start": "nodemon src/server/index.js",
     "test": "jest --coverage",
     "test:watch": "yarn test -- --watch",
     "lint": "standard --verbose | snazzy",
     "lint:watch": "gulp",
     "lint:fix": "standard --fix",
-    "build": "cross-env NODE_ENV=production webpack --progress --config webpack.prod.config -p",
+    "build": "yarn build:client && yarn build:server",
+    "build:client": "cross-env NODE_ENV=production webpack --progress --config webpack.prod.config -p",
+    "build:server": "babel src -d dist --ignore=src/client --source-maps",
     "storybook": "start-storybook -p 6006 -c storybook",
     "build-storybook": "build-storybook -c storybook"
   },
   "devDependencies": {
     "@kadira/storybook": "^2.30.1",
+    "babel-cli": "^6.22.2",
     "babel-core": "^6.18.2",
     "babel-jest": "^17.0.2",
     "babel-loader": "^6.2.8",
