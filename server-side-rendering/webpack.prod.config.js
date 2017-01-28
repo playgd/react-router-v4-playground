@@ -15,28 +15,6 @@ module.exports = validate({
     filename: '[name]-[hash].js'
   },
 
-  plugins: [
-    new ExtractTextPlugin('[name]-[hash].css'),
-
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': '"production"'
-      }
-    }),
-
-    new HtmlPlugin({
-      title: 'GitHub app',
-      template: path.join(__dirname, 'src', 'client', 'html', 'template.html')
-    }),
-
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
-    }),
-
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin()
-  ],
-
   module: {
     preLoaders: [{
       test: /\.js$/,
@@ -57,6 +35,29 @@ module.exports = validate({
       loader: ExtractTextPlugin.extract('style', 'css')
     }]
   },
+
+  plugins: [
+    new ExtractTextPlugin('[name]-[hash].css'),
+
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': '"production"'
+      }
+    }),
+
+    new HtmlPlugin({
+      title: 'GitHub app',
+      filename: 'generated.html',
+      template: path.join(__dirname, 'src', 'client', 'html', 'template.html')
+    }),
+
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false }
+    }),
+
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin()
+  ],
 
   resolve: {
     alias: {

@@ -22,17 +22,6 @@ module.exports = validate({
     publicPath: ''
   },
 
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new DashboardPlugin(),
-
-    new HtmlPlugin({
-      title: 'My app',
-      filename: 'generated.html',
-      template: path.join(__dirname, 'src', 'client', 'html', 'template.html')
-    })
-  ],
-
   module: {
     preLoaders: [{
       test: /\.js$/,
@@ -53,6 +42,17 @@ module.exports = validate({
       loaders: ['style', 'css']
     }]
   },
+
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new DashboardPlugin(),
+
+    new HtmlPlugin({
+      title: 'My app',
+      filename: 'generated.html',
+      template: path.join(__dirname, 'src', 'client', 'html', 'template.html')
+    })
+  ],
 
   resolve: {
     alias: {
