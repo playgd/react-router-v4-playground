@@ -1,7 +1,7 @@
 'use strict'
 
 const config = require('../../webpack.config')
-const alias = config.resolve.alias
+const { alias } = config.resolve
 
 const getAlias = (al) => {
   return {
@@ -22,4 +22,5 @@ require('babel-register')({
     ]
   ]
 })
+
 require('./server')
