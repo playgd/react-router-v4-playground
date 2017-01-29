@@ -14,6 +14,8 @@ const configFile = isDev ? '' : '.prod'
 const config = require(`../../webpack${configFile}.config`)
 const compiler = webpack(config)
 
+const filename = path.join(compiler.outputPath, 'generated.html')
+
 export default (app) => {
   app.use(webpackDev(compiler, {
     noInfo: true,
@@ -31,7 +33,6 @@ export default (app) => {
 
   app.use((req, res) => {
     const context = createServerRenderContext()
-    const filename = path.join(compiler.outputPath, 'generated.html')
     const htmlApp = renderToString(
       <ServerRouter location={req.url} context={context}>
         <App />
@@ -57,4 +58,6 @@ export default (app) => {
       res.send(html)
     })
   })
+
+  return app
 }
