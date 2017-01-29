@@ -3,13 +3,14 @@
 import path from 'path'
 import webpack from 'webpack'
 import webpackDev from 'webpack-dev-middleware'
-import webpackHot from 'webpack-hot-middleware'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { ServerRouter, createServerRenderContext } from 'react-router'
 import App from '../app'
 
-const configFile = process.env.NODE_ENV === 'production' ? '.prod' : ''
+const isDev = process.env.NODE_ENV === 'development'
+
+const configFile = isDev ? '' : '.prod'
 const config = require(`../../webpack${configFile}.config`)
 const compiler = webpack(config)
 
@@ -17,13 +18,16 @@ export default (app) => {
   app.use(webpackDev(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath,
-    hot: true,
+    hot: isDev,
     historyApiFallback: true,
     stats: { colors: true },
     serverSideRender: true
   }))
 
-  app.use(webpackHot(compiler))
+  if (isDev) {
+    const webpackHot = require('webpack-hot-middleware')
+    app.use(webpackHot(compiler))
+  }
 
   app.use((req, res) => {
     const context = createServerRenderContext()
