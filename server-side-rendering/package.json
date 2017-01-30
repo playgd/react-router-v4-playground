@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "cross-env NODE_ENV=production nodejs-dashboard -- node -r nodejs-dashboard dist/server/index.js",
-    "start:dev": "nodemon src/server/index.js",
+    "start:dev": "nodejs-dashboard -- node -r nodejs-dashboard src/server/index.js",
     "test": "jest --coverage",
     "test:watch": "yarn test -- --watch",
     "lint": "standard --verbose | snazzy",
@@ -21,7 +21,8 @@
     "babel-loader": "^6.2.8",
     "babel-plugin-module-alias": "^1.6.0",
     "babel-plugin-transform-require-ignore": "^0.0.2",
-    "babel-preset-es2015": "^6.18.0",
+    "babel-polyfill": "^6.22.0",
+    "babel-preset-latest": "^6.22.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "babel-register": "^6.18.0",
