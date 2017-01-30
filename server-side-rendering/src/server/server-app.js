@@ -1,63 +1,37 @@
 'use strict'
 
 import path from 'path'
-import webpack from 'webpack'
-import webpackDev from 'webpack-dev-middleware'
+import express from 'express'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { ServerRouter, createServerRenderContext } from 'react-router'
 import App from '../app'
 
 const isDev = process.env.NODE_ENV === 'development'
+const htmlServer = require(isDev ? './server-dev' : './server-prod').default
 
-const configFile = isDev ? '' : '.prod'
-const config = require(`../../webpack${configFile}.config`)
-const compiler = webpack(config)
+const app = express()
+const generateHtml = htmlServer(app)
 
-const filename = path.join(compiler.outputPath, 'generated.html')
+app.use(express.static(path.join(__dirname, '..')))
 
-export default (app) => {
-  app.use(webpackDev(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath,
-    hot: isDev,
-    historyApiFallback: true,
-    stats: { colors: true },
-    serverSideRender: true
-  }))
+app.use(async (req, res) => {
+  const context = createServerRenderContext()
+  const htmlApp = renderToString(
+    <ServerRouter location={req.url} context={context}>
+      <App />
+    </ServerRouter>
+  )
 
-  if (isDev) {
-    const webpackHot = require('webpack-hot-middleware')
-    app.use(webpackHot(compiler))
-  }
+  const result = context.getResult()
 
-  app.use((req, res) => {
-    const context = createServerRenderContext()
-    const htmlApp = renderToString(
-      <ServerRouter location={req.url} context={context}>
-        <App />
-      </ServerRouter>
-    )
+  console.log('what is in result??', result)
 
-    const result = context.getResult()
+  if (result.redirect) console.log('redirect')
+  if (result.missed) console.log('missed')
 
-    console.log('what is in result??', result)
+  const html = await generateHtml()
+  res.send(html.replace('<!-- server -->', htmlApp))
+})
 
-    if (result.redirect) {
-      console.log('redirect')
-    }
-
-    if (result.missed) {
-      console.log('missed')
-    }
-
-    compiler.outputFileSystem.readFile(filename, (err, result) => {
-      if (err) return err
-
-      const html = result.toString().replace('<!-- server -->', htmlApp)
-      res.send(html)
-    })
-  })
-
-  return app
-}
+export default app
