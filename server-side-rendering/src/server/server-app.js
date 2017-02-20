@@ -25,7 +25,7 @@ app.use(async (req, res) => {
 
   const result = context.getResult()
 
-  console.log('what is in result??', result)
+  console.log('what is in result?', result)
 
   if (result.redirect) console.log('redirect')
   if (result.missed) console.log('missed')
