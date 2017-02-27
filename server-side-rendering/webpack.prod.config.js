@@ -13,7 +13,7 @@ module.exports = validate({
 
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name]-[hash].js'
+    filename: '[name]-[chunkhash].js'
   },
 
   module: {
@@ -42,7 +42,7 @@ module.exports = validate({
       root: __dirname
     }),
 
-    new ExtractTextPlugin('[name]-[hash].css'),
+    new ExtractTextPlugin('[name]-[chunkhash].css'),
 
     new webpack.DefinePlugin({
       'process.env': {
