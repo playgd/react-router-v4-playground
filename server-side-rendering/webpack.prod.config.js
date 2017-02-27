@@ -4,6 +4,7 @@ const path = require('path')
 const webpack = require('webpack')
 const validate = require('webpack-validator')
 
+const CleanPlugin = require('clean-webpack-plugin')
 const HtmlPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
@@ -37,6 +38,10 @@ module.exports = validate({
   },
 
   plugins: [
+    new CleanPlugin(['dist'], {
+      root: __dirname
+    }),
+
     new ExtractTextPlugin('[name]-[hash].css'),
 
     new webpack.DefinePlugin({
