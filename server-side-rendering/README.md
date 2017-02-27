@@ -1,5 +1,28 @@
 # Server side Rendering with React
 
+## Up and running
+
+**Install dependencies:**
+
+```
+yarn
+```
+
+**Development:**
+
+```
+yarn start:dev
+```
+
+**Production:**
+
+```
+yarn build
+yarn start
+```
+
+## Tip for SSR
+
 **Use HtmlWebpackPlugin with Express:**
 https://github.com/ampedandwired/html-webpack-plugin/issues/145#issuecomment-170554832
 
