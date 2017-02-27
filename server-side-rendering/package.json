@@ -53,5 +53,10 @@
     "react-dom": "^15.4.0",
     "react-router": "next",
     "react-router-dom": "next"
+  },
+  "standard": {
+    "globals": [
+      "__DEV__"
+    ]
   }
 }

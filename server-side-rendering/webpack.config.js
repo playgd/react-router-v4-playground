@@ -47,6 +47,13 @@ module.exports = validate({
     new webpack.HotModuleReplacementPlugin(),
     new DashboardPlugin(),
 
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      },
+      '__DEV__': JSON.stringify(JSON.parse(process.env.BUILD_ENV || 'true'))
+    }),
+
     new HtmlPlugin({
       title: 'My app',
       filename: 'generated.html',

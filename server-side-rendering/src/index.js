@@ -16,7 +16,7 @@ const renderApp = (NextApp) => {
 
 renderApp(App)
 
-if (module.hot) {
+if (module.hot && __DEV__) {
   module.hot.accept('./app', () => {
     const NextApp = require('./app').default
     renderApp(NextApp)
