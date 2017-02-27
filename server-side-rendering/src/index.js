@@ -3,7 +3,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
-import App from './app'
+import App from './client/app-client'
 
 const renderApp = (NextApp) => {
   render(
