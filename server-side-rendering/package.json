@@ -51,8 +51,8 @@
     "express": "^4.14.0",
     "react": "^15.4.0",
     "react-dom": "^15.4.0",
-    "react-router": "next",
-    "react-router-dom": "next"
+    "react-router": "^4.0.0",
+    "react-router-dom": "^4.0.0"
   },
   "standard": {
     "globals": [
