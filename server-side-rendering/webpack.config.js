@@ -13,6 +13,7 @@ module.exports = validate({
   entry: [
     'react-hot-loader/patch',
     'webpack-hot-middleware/client',
+    'webpack/hot/only-dev-server',
     path.join(__dirname, 'src', 'index')
   ],
 

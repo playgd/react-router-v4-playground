@@ -17,8 +17,8 @@ const renderApp = (NextApp) => {
 renderApp(App)
 
 if (module.hot && __DEV__) {
-  module.hot.accept('./app', () => {
-    const NextApp = require('./app').default
+  module.hot.accept('./client/app-client', () => {
+    const NextApp = require('./client/app-client').default
     renderApp(NextApp)
   })
 }
