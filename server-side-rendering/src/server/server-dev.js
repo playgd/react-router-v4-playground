@@ -17,6 +17,7 @@ export default (app) => {
     hot: true,
     historyApiFallback: true,
     stats: { colors: true },
+    compress: true,
     serverSideRender: true
   }))
 
