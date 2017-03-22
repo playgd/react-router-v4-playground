@@ -1,6 +1,6 @@
 'use strict'
 
-import { Component, PropTypes, Children } from 'react'
+import { Component, PropTypes } from 'react'
 
 class DocumentTitle extends Component {
   update (text) {
