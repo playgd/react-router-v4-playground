@@ -3,6 +3,7 @@
 import React from 'react'
 import { Link, Match } from 'react-router'
 import Topic from './topic'
+import DocumentTitle from '../../components/document-title'
 
 const menu = (pathname) => [
   { link: `${pathname}/rendering`, label: 'Rendering With React' },
@@ -15,7 +16,7 @@ export default (props) => {
 
   return (
     <div>
-      {console.log(props)}
+      <DocumentTitle>Topics</DocumentTitle>
       <h2>Topics</h2>
       <ul>
         {menu(pathname).map((item, index) => (
@@ -25,12 +26,16 @@ export default (props) => {
         ))}
       </ul>
 
-      <Match pattern={`${pathname}/:topicId`} component={Topic} />
+      <Match pattern={`${pathname}/:topicId`} render={(routeProps) => (
+        <Topic
+          title={menu(pathname).find((p) => p.link.includes(routeProps.params.topicId)).label}
+          {...routeProps}
+        />
+      )} />
 
-      <Match pattern={pathname} exactly render={(renderOptions) => {
-        console.log('renderOptions:', renderOptions)
-        return <h3>Please, select a topic</h3>
-      }} />
+      <Match pattern={pathname} exactly render={(renderOptions) => (
+        <h3>Please, select a topic</h3>
+      )} />
     </div>
   )
 }

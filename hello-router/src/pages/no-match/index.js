@@ -1,8 +1,11 @@
 'use strict'
 
 import React from 'react'
+import DocumentTitle from '../../components/document-title'
 
-export default (props) => {
-  console.log(props)
-  return <div>No Match</div>
-}
+export default (props) => (
+  <div>
+    <DocumentTitle>404</DocumentTitle>
+    No Match
+  </div>
+)
