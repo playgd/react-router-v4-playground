@@ -1,42 +1,21 @@
 'use strict'
 
-import React, { PureComponent } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import queryString from 'query-string'
 
-import './css/style.css'
+const App = ({ handleClick }) => (
+  <button onClick={handleClick}>increment!</button>
+)
 
-class App extends PureComponent {
-  constructor () {
-    super()
-    this.state = {
-      title: '...',
-      Component: 'div'
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    handleClick () {
+      const { hey } = queryString.parse(ownProps.history.location.search)
+      ownProps.history.push(`?hey=${+(hey || 0) + 1}`)
     }
-  }
-
-  getTitle () {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve('My app with async / await!')
-      }, 2000)
-    })
-  }
-
-  async componentDidMount () {
-    const title = await import('components/title')
-
-    this.setState({
-      title: await this.getTitle(),
-      Component: title.default
-    })
-  }
-
-  render () {
-    return (
-      <div>
-        <this.state.Component>{this.state.title}</this.state.Component>
-      </div>
-    )
   }
 }
 
-export default App
+export default withRouter(connect(null, mapDispatchToProps)(App))
