@@ -9,13 +9,11 @@ const App = ({ handleClick }) => (
   <button onClick={handleClick}>increment!</button>
 )
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    handleClick () {
-      const { hey } = queryString.parse(ownProps.history.location.search)
-      ownProps.history.push(`?hey=${+(hey || 0) + 1}`)
-    }
+const mapDispatchToProps = (dispatch, { history }) => ({
+  handleClick () {
+    const { hey } = queryString.parse(history.location.search)
+    history.push(`?hey=${+(hey || 0) + 1}`)
   }
-}
+})
 
 export default withRouter(connect(null, mapDispatchToProps)(App))
