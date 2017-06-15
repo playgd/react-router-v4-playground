@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { createStore } from 'redux'
 import App from './app'
 
-const store = createStore((state, action) => state)
+const store = createStore((state) => state)
 
 const renderApp = (NextApp) => {
   render(
