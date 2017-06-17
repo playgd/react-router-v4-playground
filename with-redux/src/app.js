@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom'
 import queryString from 'query-string'
 
 const App = ({ handleClick }) => (
-  <button onClick={handleClick}>increment!</button>
+  <button onClick={handleClick}>increment hey on URL!</button>
 )
 
 const mapDispatchToProps = (dispatch, { history }) => ({
