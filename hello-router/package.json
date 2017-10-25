@@ -29,6 +29,6 @@
     "history": "^4.4.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
-    "react-router": "next"
+    "react-router-dom": "^4.2.2"
   }
 }
