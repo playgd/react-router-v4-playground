@@ -3,11 +3,13 @@
 import React from 'react'
 import DocumentTitle from '../../components/document-title'
 
-export default ({ params, title }) => (
+export default ({ match, title }) => (
   <div>
     <DocumentTitle>{title} - Topic</DocumentTitle>
     Topic:
-    - slug: {params.topicId}<br />
-    - title: {title}
+    <ul>
+      <li>slug: {match.params.topicId}</li>
+      <li>title: {title}</li>
+    </ul>
   </div>
 )
