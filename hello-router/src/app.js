@@ -1,11 +1,11 @@
 'use strict'
 
 import React from 'react'
-import { BrowserRouter, Match, Miss, Link } from 'react-router'
+import { BrowserRouter, Link, Switch, Route } from 'react-router-dom'
 import Home from 'pages/home'
 import About from 'pages/about'
 import Topics from 'pages/topics'
-import NoMatch from 'pages/no-match'
+import NoRoute from 'pages/no-match'
 
 import './css/style.css'
 
@@ -29,11 +29,12 @@ const App = () => (
 
       <hr />
 
-      <Match exactly pattern='/' component={Home} />
-      <Match pattern='/about' component={About} />
-      <Match pattern='/topics' component={Topics} />
-
-      <Miss component={NoMatch} />
+      <Switch>
+        <Route exact path='/' component={Home} />
+        <Route path='/about' component={About} />
+        <Route path='/topics' component={Topics} />
+        <Route component={NoRoute} />
+      </Switch>
     </div>
   </BrowserRouter>
 )
